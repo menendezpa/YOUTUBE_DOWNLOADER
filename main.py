@@ -1,31 +1,48 @@
-import yt_dlp
-import os
+from tkinter import * 
+from tkinter import filedialog as FileDialog
+from fun import *
+#Creamos la ventana
 
-def download_audio(file="urls", folder="music"):
-    try:
-        if not os.path.exists(folder):
-            os.makedirs(folder)
+root = Tk()
+root.title("YouTube downloader")
+root.geometry("600x300")
 
-        options = {
-         'format': 'bestaudio/best',
-         'outtmpl': f'{folder}/%(title)s.%(ext)s',
-         'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-    }],
-}
+root.maxsize(600, 300)
+root.minsize(600, 300)
 
-        with open(file, encoding='utf-8') as f:
-            urls = [line.strip() for line in f if line.strip()]
 
-        print("Downloading Youtube audio...")
-        with yt_dlp.YoutubeDL(options) as ydl:
-            ydl.download(urls)
+frm1 = Frame(
+    root,
+    width=150,
+    height=214,
+    bg="#F9E9F8",
+    highlightbackground="#EEB3B3",
+    highlightcolor="#EEB3B3",
+    highlightthickness=1,
+    bd=0
+)
+frm1.grid(row=0, column=0, padx=30, pady=20)
 
-        print("Download completed")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+frm2 = Frame(
+    root,
+    width="300",
+    height="214",
+    bg="#F9E9F8",
+    highlightbackground="#EEB3B3",
+    highlightcolor="#EEB3B3",
+    highlightthickness=1,
+    bd=0
+            )
+frm2.grid(column=1, row=0, padx=50, pady=40)
 
-if __name__ == "__main__":
-    download_audio()
+
+btn1 = Button(frm1, text="Importar", width=15, height=2)
+btn1.grid(column=0, row=0, padx=10, pady=10)
+
+btn2 = Button(frm1, text="Descargar", width=15, height=2)
+btn2.grid(column=0, row=1, padx=10, pady=10)
+
+btn3 = Button(frm1, text="Salir", width=15, height=2)
+btn3.grid(column=0, row=2, padx=10, pady=10)
+
+root.mainloop()
